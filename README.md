@@ -46,3 +46,74 @@ inject react into the APP
 Read the parcel documentation
 
 dist : parcel makes a development build and put inside this folder. once the project is hosted. it will get read from this file
+
+EPS - 3 : Laying foundation
+
+Write the script for parcel run command
+
+- "start": "parcel index.html" : start the project in local environment
+- "build": "parcel build index.html" : build the project
+
+Now to start the project. Below is the command
+
+- npm run start or npm start
+- npm run build or npm build
+
+## React element
+
+const heading = React.createElement("h1", { id: "heading" }, "Namaste React "); /// this will create an object
+const root = ReactDOM.createRoot(document.getElementById("root")); // convert the object into HTML element
+root.render(heading); // Render to browser DOM
+
+JSX is HTML like syntax. it is not HTML inside javascript
+Browser does not understand JSX
+JSX code transpile before reaches to JS engine. Transpile means convert the code that browser can understand. Transpiling is done by parcel.
+
+Whos does this Transpile ? - Babel
+
+Attributes provide to JSX in camel case
+
+Multiple line JSX rounds inside parentheses ().
+
+what is functional component ?
+
+- it is normal javascript function which will retrun some JSX code
+- A function which returns a piece of react element known as functional component
+
+Below is the example of a functional component
+
+const HeadingComponent = () => { return <h1>Example of functional component</h1>};
+
+or
+
+const HeadingComponent = () => <h1>Example of functional component</h1>
+
+// React Element
+const heading = (
+
+<h1 className="head" tabindex="5">
+Namaste React using JSX
+<h1>
+);
+
+To change this to react component - First letter capital - Add this bracket ()
+
+const Heading = () => (
+
+<h1 className="head" tabindex="5">
+Namaste React using JSX
+<h1>
+);
+
+How render a component in to the root
+
+root.render(<Component/>)
+
+we can put
+
+- element inside element
+- component inside element
+- component inside component
+- element inside component
+
+All the above is possible in component compositon
