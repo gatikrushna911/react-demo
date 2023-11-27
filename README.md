@@ -117,3 +117,19 @@ we can put
 - element inside component
 
 All the above is possible in component compositon
+
+Esp - 4 : Builiding food ordering app
+
+Low level planning to building an APP
+
+- Header
+  - LOGO
+  - NAV items
+- Body
+  - Search
+  - RestaurantContainer
+  - RestaurantCard
+
+What is props ?
+
+- It is a normal argument to a function
