@@ -133,3 +133,8 @@ Low level planning to building an APP
 What is props ?
 
 - It is a normal argument to a function
+
+There are two types of routing
+
+- sever side routing : routing happens in server side and refresh the page. Example href
+- client side routing : routing happens in client side and without refresh the whole pages. The example is for LINK in react routing

@@ -1,28 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-const Header = () => {
-  return (
-    <div className="header-container">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX0oZvf_Vj2VpP9fp5NLte238mjaO3LScZag&usqp=CAU"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const restList = [
+export const restList = [
   {
     info: {
       id: "469200",
@@ -808,51 +784,11 @@ const restList = [
   },
 ];
 
-const Body = () => {
-  return (
-    <div>
-      <div className="search">Search</div>
-      <div className="rest-container">
-        {restList.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
+export const REST_LOGO =
+  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
-const RestaurantCard = (props) => {
-  console.log(props.restData);
-  const { cloudinaryImageId, name, cuisines, avgRating, costForTwo } =
-    props.restData.info;
-  return (
-    <div className="rest-card">
-      {
-        <img
-          className="rest-logo"
-          src={
-            "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-            cloudinaryImageId
-          }
-        />
-      }
-      <h4>{name}</h4>
-      <h5>{cuisines.join(",")}</h5>
-      <h5>{avgRating}</h5>
-      <h5>{costForTwo}</h5>
-    </div>
-  );
-};
+export const HEADER_LOGO =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX0oZvf_Vj2VpP9fp5NLte238mjaO3LScZag&usqp=CAU";
 
-const AppLayout = () => {
-  return (
-    <div>
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<AppLayout />);
+export const MENU_LOGO =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.3532772&lng=85.8265977&restaurantId=";
