@@ -4,17 +4,18 @@ import { MENU_LOGO } from "../utils/Constants";
 const RestaurantMenu = () => {
   const { restid } = useParams();
 
-  console.log(restid);
+  // console.log(restid);
   const [restaurantMenu, setRestaurantMenu] = useState(null);
   useEffect(() => {
     fetchRestaurantsMenu();
   }, []);
   const MENU_URL =
     MENU_LOGO + restid + "&catalog_qa=undefined&submitAction=ENTER";
-  console.log(MENU_URL);
+  //console.log(MENU_URL);
   const fetchRestaurantsMenu = async () => {
     const result = await fetch(MENU_URL);
     const json = await result.json();
+    // console.log(json);
     setRestaurantMenu(json?.data);
   };
 
@@ -23,9 +24,18 @@ const RestaurantMenu = () => {
   if (restaurantMenu == null) return "";
   const { name, areaName, costForTwoMessage } =
     restaurantMenu.cards[0]?.card?.card?.info;
-  const { itemCards } =
-    restaurantMenu.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-      ?.card;
+  // const { itemCards } =
+  //   restaurantMenu.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
+  //     ?.card;
+
+  const { cards } = restaurantMenu.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
+  const itemCards = cards.filter(
+    (menu) =>
+      menu.card.card["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
+
+  console.log(itemCards);
 
   return (
     <div>
@@ -36,7 +46,10 @@ const RestaurantMenu = () => {
       <h4>Menus</h4>
       <ul>
         {itemCards.map((item) => (
-          <li>{item?.card?.info?.name}</li>
+          <li>
+            {(key = item?.card?.info?.id)}
+            {item?.card?.info?.name}
+          </li>
         ))}
       </ul>
     </div>

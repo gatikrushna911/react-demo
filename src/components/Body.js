@@ -1,11 +1,33 @@
-import RestaurantCard from "./restaurantcard";
+import RestaurantCard, { withPromoted } from "./RestaurantCard";
 import { restList } from "../utils/Constants";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Body = () => {
-  const [restaurantList, setRestaurantList] = useState(restList);
+  const [restaurantList, setRestaurantList] = useState(null);
 
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const response = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.3532772&lng=85.8265977&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await response.json();
+
+    // console.log(
+    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    // );
+
+    setRestaurantList(
+      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    );
+  }
+
+  const RestaurantcardPromoted = withPromoted(RestaurantCard);
+  const restPromotedFlag = true;
+  if (restaurantList === null) return "";
   return (
     <div>
       <div className="filter-alt">
@@ -21,13 +43,19 @@ const Body = () => {
           {"ratings > 4"}{" "}
         </button>
       </div>
-      <div className="rest-container">
+      <div></div>
+      <div className="flex flex-wrap">
         {restaurantList.map((restaurant) => (
           <Link
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard restData={restaurant} />
+            {restPromotedFlag ? (
+              <RestaurantcardPromoted restData={restaurant} />
+            ) : (
+              <RestaurantcardPromoted restData={restaurant} />
+            )}
+            {/* <RestaurantcardPromoted restData={restaurant} /> */}
           </Link>
         ))}
       </div>
