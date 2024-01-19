@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MENU_LOGO } from "../utils/Constants";
+import RestuarantCategory from "./RestaurantCategory";
 const RestaurantMenu = () => {
   const { restid } = useParams();
+  const [showIndex, setShowIndex] = useState(null);
 
   // console.log(restid);
   const [restaurantMenu, setRestaurantMenu] = useState(null);
@@ -22,36 +24,44 @@ const RestaurantMenu = () => {
   //+ params  + "&catalog_qa=undefined&submitAction=ENTER"}
 
   if (restaurantMenu == null) return "";
-  const { name, areaName, costForTwoMessage } =
+  const { name, areaName, costForTwoMessage, cuisines } =
     restaurantMenu.cards[0]?.card?.card?.info;
   // const { itemCards } =
   //   restaurantMenu.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
   //     ?.card;
 
   const { cards } = restaurantMenu.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
-  const itemCards = cards.filter(
+  const categories = cards.filter(
     (menu) =>
       menu.card.card["@type"] ===
       "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
 
-  console.log(itemCards);
+  //console.log(categories);
 
   return (
-    <div>
-      <h4>
+    <div className="text-center">
+      <h4 className="font-bold my-6 text-2xl">
         {name} - {areaName}
       </h4>
-      <p>{costForTwoMessage}</p>
-      <h4>Menus</h4>
-      <ul>
+      <p className="font-bold text-lg">{cuisines.join(",")}</p>
+
+      {categories.map((categories, index) => (
+        <RestuarantCategory
+          key={categories.card.card.title}
+          data={categories?.card?.card}
+          showItems={index === showIndex ? true : false}
+          setShowItems={() => setShowIndex(index)}
+        />
+      ))}
+      {/* <ul>
         {itemCards.map((item) => (
           <li>
             {(key = item?.card?.info?.id)}
             {item?.card?.info?.name}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
