@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import { HEADER_LOGO } from "../utils/Constants";
 import { useContext } from "react";
 import UserContext from "./UserContext";
+import { useSelector } from "react-redux";
 const Header = () => {
   // by this we can add the context individually to the each page
   const { loggedInUser } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
+
   return (
     //header-container
     <div className="flex justify-between shadow-lg border border-solid">
@@ -23,7 +27,9 @@ const Header = () => {
           <li className="m-2 p-2">
             <Link to="contact">Contact Us</Link>
           </li>
-          <li className="m-2 p-2">Cart</li>
+          <li className="m-2 p-2 cursor-pointer">
+            <Link to="cart">Cart - ({cartItems.length} items)</Link>
+          </li>
           <li className="m-2 p-2 text-red-400">{loggedInUser}</li>
         </ul>
       </div>

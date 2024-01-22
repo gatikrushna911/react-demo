@@ -40,7 +40,7 @@ const RestaurantMenu = () => {
   //console.log(categories);
 
   return (
-    <div className="text-center">
+    <div className="text-centers">
       <h4 className="font-bold my-6 text-2xl">
         {name} - {areaName}
       </h4>

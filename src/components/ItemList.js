@@ -1,8 +1,16 @@
+import { useDispatch } from "react-redux";
 import { REST_LOGO } from "../utils/Constants";
+import { addItem } from "../utils/cartSlice";
 
 const Itemlist = ({ items }) => {
   //const items = props.items;
   //console.log(items);
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   return (
     <div>
@@ -23,8 +31,11 @@ const Itemlist = ({ items }) => {
               src={REST_LOGO + item.card.info.imageId}
             ></img>
             <div className="relative text-center inline-block">
-              <button className=" mx-10 p-2 rounded-md bg-white text-green-500 shadow-lg">
-                ADD
+              <button
+                className=" mx-10 p-2 rounded-md bg-white text-green-500 shadow-lg"
+                onClick={() => handleAddItem(item)}
+              >
+                ADD+
               </button>
             </div>
           </div>
